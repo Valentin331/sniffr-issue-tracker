@@ -1,0 +1,25 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('includes/nav.ejs') %>
+
+    <h1>Issue</h1>
+
+    <div class="wrapper">
+        <% if (issues.length > 0) { %>
+            <div class="project-container-list">
+                <% for (let issue of issues) { %>
+                        <div style="cursor: pointer" class="project-container">
+                            Name: <%= issue.name %>
+                            <br>
+                            Description: <%= issue.description %>
+                        </div>
+                <% } %>
+            </div>
+        <% } else { %>
+            <h1>Issue not found!</h1>
+        <% } %>
+    </div>
+
+<%- include('includes/end.ejs') %>

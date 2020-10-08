@@ -1,0 +1,39 @@
+<%- include('includes/head.ejs') %>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <%- include('includes/nav.ejs') %>
+
+    <h1>Projects</h1>
+
+    <%- include('includes/project-nav.ejs') %>
+
+    <h3>Project: <%= project_name %></h3>
+
+    <div class="wrapper">
+        <nav>
+            <ul>
+                <li><a href="/issue/<%= project_id %>/add">Add issue</a></li>
+            </ul>
+        </nav>
+        <% if (issues.length > 0) { %>
+            <div class="project-container-list">
+                <% for (let issue of issues) { %>
+                    <a href="/issue/<%= issue._id %>">
+                        <div style="cursor: pointer" class="project-container">
+                            <%= issue.name %>
+                        </div>
+                    </a>
+                <% } %>
+            </div>
+        <% } else { %>
+            <h1>No issues found.</h1>
+        <% } %>
+    </div>
+
+    <script>
+
+    </script>
+
+<%- include('includes/end.ejs') %>

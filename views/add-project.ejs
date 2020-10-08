@@ -1,0 +1,30 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('includes/nav.ejs') %>
+
+    <h1>Projects</h1>
+
+    <%- include('includes/project-nav.ejs') %>
+
+    <h3>Add project</h3>
+
+    <form action="/api/project/add" method="POST">
+        <div>
+            <label for="name">Title: </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div>
+            <label for="description">Description: </label>
+            <input type="text" name="description" id="description">
+        </div>
+        <div>
+            <label for="owner">Owner: </label>
+            <input type="text" name="owner" id="owner">
+        </div>
+
+        <button class="btn" type="submit">Add Project</button>
+    </form>
+
+<%- include('includes/end.ejs') %>
