@@ -2,7 +2,6 @@
 </head>
 
 <body>
-    <%- include('includes/nav.ejs') %>
 
     <h1>Issues</h1>
 
@@ -11,15 +10,16 @@
     <h3>Add issue</h3>
 
     <form action="/api/issue/<%= project_id %>/add" method="POST">
-        <div>
-            <label for="name">Title: </label>
-            <input type="text" name="name" id="name">
+        <div class="form-group" >
+          <label for="exampleInputEmail1">Title</label>
+          <input class="form-control" type="text" placeholder="Title..." name="name" id="name">
         </div>
-        <div>
-            <label for="description">Description: </label>
-            <input type="text" name="desc" id="desc">
+        <div class="form-group">
+          <label for="exampleInputPassword1">Description</label>
+          <input class="form-control" type="text" placeholder="Description..." name="desc" id="desc">
         </div>
-        <button class="btn" type="submit">Add Issue</button>
-    </form>
+
+        <button type="submit" class="btn btn-primary">Add Issue</button>
+      </form>
 
 <%- include('includes/end.ejs') %>

@@ -3,7 +3,6 @@
 </head>
 
 <body>
-    <%- include('includes/nav.ejs') %>
 
     <h1>Projects</h1>
 
@@ -22,7 +21,13 @@
                 <% for (let issue of issues) { %>
                     <a href="/issue/<%= issue._id %>">
                         <div style="cursor: pointer" class="project-container">
-                            <%= issue.name %>
+                            
+                            <div class="card w-75">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%= issue.name %></h5>
+                                  <p class="card-text"><%= issue.description %></p>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 <% } %>

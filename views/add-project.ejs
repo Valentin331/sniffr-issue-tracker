@@ -1,8 +1,5 @@
 <%- include('includes/head.ejs') %>
-</head>
 
-<body>
-    <%- include('includes/nav.ejs') %>
 
     <h1>Projects</h1>
 
@@ -11,20 +8,19 @@
     <h3>Add project</h3>
 
     <form action="/api/project/add" method="POST">
-        <div>
-            <label for="name">Title: </label>
-            <input type="text" name="name" id="name">
+        <div class="form-group" >
+          <label for="exampleInputEmail1">Title</label>
+          <input class="form-control" type="text" placeholder="Title..." name="name" id="name">
         </div>
-        <div>
-            <label for="description">Description: </label>
-            <input type="text" name="description" id="description">
+        <div class="form-group">
+          <label for="exampleInputPassword1">Description</label>
+          <input class="form-control" type="text" placeholder="Description..." name="description" id="description">
         </div>
-        <div>
-            <label for="owner">Owner: </label>
-            <input type="text" name="owner" id="owner">
-        </div>
-
-        <button class="btn" type="submit">Add Project</button>
-    </form>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Project owner</label>
+            <input class="form-control" type="text" placeholder="Description..." name="owner" id="owner">
+          </div>
+        <button type="submit" class="btn btn-primary">Add Project</button>
+      </form>
 
 <%- include('includes/end.ejs') %>

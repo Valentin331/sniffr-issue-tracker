@@ -1,9 +1,4 @@
 <%- include('includes/head.ejs') %>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-
-<body>
-    <%- include('includes/nav.ejs') %>
 
     <h1>Projects</h1>
 
@@ -17,7 +12,13 @@
                 <% for (let project of projects) { %>
                     <a href="/project/<%= project._id %>">
                         <div style="cursor: pointer" class="project-container">
-                            <%= project.name %>
+                            
+                              <div class="card w-75">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%= project.name %></h5>
+                                  <p class="card-text"><%= project.description %></p>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 <% } %>
