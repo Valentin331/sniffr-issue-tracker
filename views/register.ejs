@@ -1,0 +1,48 @@
+<%- include('includes/unauth-head.ejs') %>
+</head>
+
+<body>
+
+    <h1>Register Page</h1>
+
+    <br>
+
+    <form action="/api/auth/register" method="POST">
+        <div class="form-group" >
+            <label for="exampleInputEmail1">First name</label>
+            <input class="form-control" type="text" name="firstName" id="firstName">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Last name</label>
+            <input class="form-control" type="text" name="lastName" id="lastName">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Username</label>
+            <input class="form-control" type="text" name="username" id="username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name="password" id="password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Comfirm password</label>
+            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
+        </div>
+
+        <% if (message) { %>
+            <div class="alert <%= messageClass %>" role="alert">
+                <%= message %>
+            </div>
+        <% } %>
+
+        
+
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+
+<%- include('includes/end.ejs') %>

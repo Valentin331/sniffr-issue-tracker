@@ -32,8 +32,11 @@ exports.getIssuesByProject = asyncHandler( async (req, res, next) => {
 // @access Public
 exports.addIssue = asyncHandler( async (req, res, next) => {
 
+    console.log('=======================REQBODY========================')
+    console.log(req.body);
+
     // Destructuring the body
-    const { name, desc} = req.body;
+    const { name, desc, userinfo_dump} = req.body;
 
     // Check if item name exists
     const issueExists = await Issue.findOne({ "name": req.body.name });
@@ -51,7 +54,8 @@ exports.addIssue = asyncHandler( async (req, res, next) => {
     const issue = await Issue.create({
         "name": name,
         "description": desc,
-        "project": projectExists._id
+        "project": projectExists._id,
+        "userinfo_dump": userinfo_dump
     });
     console.log(issue)
     res.status(200).json({ success: true, data: issue });
@@ -64,7 +68,7 @@ exports.addIssue = asyncHandler( async (req, res, next) => {
 exports.addIssueView = asyncHandler( async (req, res, next) => {
 
     // Destructuring the body
-    const { name, desc } = req.body;
+    const { name, desc, userinfo_dump } = req.body;
 
     // Check if item name exists
     const issueExists = await Issue.findOne({ "name": req.body.name });
@@ -82,7 +86,9 @@ exports.addIssueView = asyncHandler( async (req, res, next) => {
     const issue = await Issue.create({
         "name": name,
         "description": desc,
-        "project": req.params.projectId
+        "project": req.params.projectId,
+        "creation_type": "user",
+        "userinfo_dump": userinfo_dump
     });
     console.log(issue)
     res.redirect(`/project/${req.params.projectId}`);

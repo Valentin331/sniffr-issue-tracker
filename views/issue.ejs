@@ -13,6 +13,15 @@
                             Name: <%= issue.name %>
                             <br>
                             Description: <%= issue.description %>
+                            <br>
+                            Creation type: <%= issue.creation_type %>
+                            <br>
+                            <% if (issue.code_dump) { %>
+                            Code dump: <%= issue.code_dump %>
+                            <% } %>
+                            <% if (issue.userinfo_dump) { %>
+                            Information: <%= issue.userinfo_dump %>
+                            <% } %>
                         </div>
                 <% } %>
             </div>

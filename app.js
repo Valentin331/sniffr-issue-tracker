@@ -5,6 +5,11 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/error");
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
+// Mongoose Schemas
+const AuthToken = require('./models/AuthToken');
+const User = require('./models/User');
 
 // ============================ SETUP ============================
 
@@ -17,12 +22,43 @@ connectDatabase();
 // Using express
 const app = express();
 
+// To parse cookies from the HTTP Request
+app.use(cookieParser());
+
+// Body parser => This is a middleware that extracts the entire body portion of an incoming request stream and exposes it to 'req.body'
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// ========================= MIDDLEWARES ==========================
+
+app.use(async (req, res, next) => {
+  try {
+    let userDocument = '';
+    console.log('Auth middleware called.')
+  // Get auth token from the cookies
+  const authToken = req.cookies['AuthToken'];
+
+  // Getting that auth token from database
+  const userData = await AuthToken.findOne({ token: authToken });
+  if (userData) {
+    // Getting user info from database based on user id
+    userDocument = await User.findById(userData.user);    
+  }
+
+  // Inject the user to the request
+  req.user = userDocument;
+
+  console.log('Current req.user:', req.user);
+
+  next();
+  } catch (error) {
+    console.log(error)
+  }
+});
+
 // Setting up EJS templating engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-// Body parser => This is a middleware that extracts the entire body portion of an incoming request stream and exposes it to 'req.body'
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // Enable errorHandler
 app.use(errorHandler);
@@ -36,12 +72,14 @@ if (process.env.NODE_ENV == "development") {
 // Static public file
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // ============================ ROUTES ============================
 
 // Route files
 const projects = require("./routes/projects");
 const issues = require("./routes/issues");
 const adminMain = require("./routes/admin");
+const auth = require('./routes/auth');
 
 // Mounting routers
 // Views
@@ -49,6 +87,7 @@ app.use('/', adminMain)
 // API
 app.use("/api/project", projects);
 app.use("/api/issue", issues);
+app.use("/api/auth", auth);
 
 // 404 page
 app.use((req, res, next) => {

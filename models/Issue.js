@@ -11,14 +11,24 @@ const IssueSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: false
+        default: "No description"
+    },
+    userinfo_dump: {
+        type: String
     },
     project: {
         type: mongoose.Schema.ObjectId,
         ref: 'Project',
         required: true
+    },
+    creation_type: {
+        type: String,
+        enum: ["api", "user"],
+        required: [true, "Please add creation_type property"]
+    },
+    code_dump: {
+        type: String
     }
- });
-
+});
  
- module.exports = mongoose.model('Issue', IssueSchema);
+module.exports = mongoose.model('Issue', IssueSchema);
